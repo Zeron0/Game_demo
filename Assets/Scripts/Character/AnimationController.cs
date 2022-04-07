@@ -15,6 +15,7 @@ namespace Character
                 return;
             }
 
+            _animator.ResetTrigger(_animationType.ToString());
             _animationType = type;
             _animator.SetTrigger(type.ToString());
         }
@@ -24,6 +25,8 @@ namespace Character
     {
         Idle,
         Walk,
-        Run
+        Run,
+        Attack,
+        Death
     }
 }
