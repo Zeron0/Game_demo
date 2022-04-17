@@ -12,6 +12,7 @@ namespace Character
 
         [SerializeField] [Min(1)] private float _radius = 15f;
         [SerializeField] [Min(0.1f)] private float _attackInterval = 1f;
+        [SerializeField] [Min(0.1f)] private float _interval = 0.25f;
         [SerializeField] private LayerMask _mask;
 
         private Collider[] _hitColliders;
@@ -20,7 +21,6 @@ namespace Character
         private WaitForSeconds _finding;
         private WaitForSeconds _attacking;
         
-        private float _interval = 0.25f;
         private bool _isFinding;
         private bool _canAttack = true;
 

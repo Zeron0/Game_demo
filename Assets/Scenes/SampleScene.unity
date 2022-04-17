@@ -948,6 +948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a534f1bdc78b85d459ff474d706b57df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 1588192406}
   _joystick: {fileID: 1782896825}
   _container: {fileID: 170915252}
 --- !u!114 &1228989016

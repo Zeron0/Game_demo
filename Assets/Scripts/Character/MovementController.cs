@@ -19,7 +19,7 @@ namespace Character
         
         private void Update()
         {
-            if (_joystick.Direction == Vector3.zero)
+            if (_joystick.Direction == Vector2.zero)
             {
                 IsMoving = false;
 
@@ -34,9 +34,10 @@ namespace Character
             }
 
             IsMoving = true;
-            transform.rotation = Quaternion.LookRotation(_joystick.Direction);
+            Vector3 direction = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
+            transform.rotation = Quaternion.LookRotation(direction);
             _animationController.SetAnimation(AnimationType.Run);
-            _characterController.SimpleMove(_joystick.Direction * _speed);
+            _characterController.SimpleMove(direction * _speed);
         }
 
         public void SetTarget(Transform target)
