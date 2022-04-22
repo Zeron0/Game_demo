@@ -9,7 +9,12 @@ ModelImporter:
   - first:
       74: -203655887218126122
     second: mixamo.com
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Paladin_MAT
+    second: {fileID: 2100000, guid: 2be19e0891412dd4586e5c52dd4b86d4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

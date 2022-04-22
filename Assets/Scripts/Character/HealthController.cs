@@ -13,7 +13,8 @@ namespace Character
 
         private int _currentHP;
         private bool _alive = true;
-        
+
+        public Transform Transform => transform;
         public int HealthPoints => _currentHP;
         public bool Alive => _alive;
 
