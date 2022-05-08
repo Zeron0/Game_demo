@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Character
@@ -11,6 +12,7 @@ namespace Character
         [SerializeField] private float _maxDistance = 15f;
 
         private Vector3 _initialPos;
+        private Transform _target;
 
         private bool _isInit;
         
@@ -18,7 +20,9 @@ namespace Character
 
         private void Update()
         {
-            transform.position += transform.forward * _speed * Time.deltaTime;
+            Vector3 direction = (_target.position - transform.position).normalized;
+            transform.position += direction * _speed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(direction);
 
             if (_isInit == false)
             {
@@ -33,9 +37,10 @@ namespace Character
             }
         }
 
-        public void Init()
+        public void Init(Transform target)
         {
             _isInit = true;
+            _target = target;
             _initialPos = transform.position;
         }
 

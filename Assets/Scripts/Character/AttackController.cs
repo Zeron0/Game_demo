@@ -5,7 +5,7 @@ namespace Character
 {
     public class AttackController : MonoBehaviour, IDamager
     {
-        [SerializeField] private MovementController _movementController;
+        [SerializeField] private PlayerMovementController playerMovementController;
         [SerializeField] private AnimationController _animationController;
         [SerializeField] private Arrow _arrowPrefab;
         [SerializeField] private Transform _arrowSpawnPoint;
@@ -37,7 +37,7 @@ namespace Character
 
         private void Update()
         {
-            if (_movementController.IsMoving)
+            if (playerMovementController.IsMoving)
             {
                 _isFinding = false;
             }
@@ -58,7 +58,9 @@ namespace Character
             {
                 yield return _finding;
 
-                if (!_isFinding || !_canAttack || Physics.OverlapSphereNonAlloc(transform.position, _radius, _hitColliders, _mask) == 0)
+                int colliders = Physics.OverlapSphereNonAlloc(transform.position, _radius, _hitColliders, _mask);
+
+                if (!_isFinding || !_canAttack || colliders == 0)
                 {
                     continue;
                 }
@@ -66,18 +68,14 @@ namespace Character
                 float minDistance = Mathf.Infinity;
                 _target = null;
                     
-                for (int i = 0; i < _hitColliders.Length; i++)
+                for (int i = 0; i < colliders; i++)
                 {
-                    if (_hitColliders[i] == null)
-                    {
-                        break;
-                    }
-
-                    Vector3 direction = _hitColliders[i].transform.position - _arrowSpawnPoint.position + Vector3.up;
+                    Vector3 direction = _hitColliders[i].transform.position - _arrowSpawnPoint.position;
                     Ray ray = new Ray(_arrowSpawnPoint.position, direction);
                     RaycastHit hit;
                     Physics.Raycast(ray, out hit, _radius);
 
+                    Debug.Log($"{hit.transform} and {_hitColliders[i].transform}");
                     if (hit.transform != _hitColliders[i].transform)
                     {
                         continue;
@@ -102,9 +100,9 @@ namespace Character
         private IEnumerator Attack()
         {
             Hurt(_target);
-            _movementController.SetTarget(_target.Transform);
+            playerMovementController.SetTarget(_target.Transform);
             Quaternion rotation = Quaternion.LookRotation(_target.Transform.position - _arrowSpawnPoint.position + Vector3.up);
-            Instantiate(_arrowPrefab, _arrowSpawnPoint.position, rotation).Init();
+            Instantiate(_arrowPrefab, _arrowSpawnPoint.position, rotation).Init(_target.Transform);
             _canAttack = false;
             _animationController.SetAnimation(AnimationType.Attack);
             yield return _attacking;

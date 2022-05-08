@@ -7,6 +7,8 @@ namespace Character
     public class AnimationController : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
+        [SerializeField] private Collider _collider;
+        [SerializeField] private GameObject _skeleton;
 
         private Dictionary<AnimationType, string> _animations = new Dictionary<AnimationType, string>();
 
@@ -25,6 +27,14 @@ namespace Character
         {
             if (_animationType == type)
             {
+                return;
+            }
+
+            if (type == AnimationType.Death)
+            {
+                _animator.enabled = false;
+                _collider.enabled = false;
+                _skeleton.SetActive(true);
                 return;
             }
 

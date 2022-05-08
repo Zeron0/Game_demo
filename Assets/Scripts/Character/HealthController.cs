@@ -7,7 +7,8 @@ namespace Character
     public class HealthController : MonoBehaviour, IDamageable
     {
         [SerializeField] private AnimationController _animationController;
-        
+        [SerializeField] private MovementController _movementController;
+
         [SerializeField] private int _initialHP = 3;
         [SerializeField] private float _deathDelay = 2;
 
@@ -36,8 +37,8 @@ namespace Character
         public void OnDeath()
         {
             _alive = false;
-            _animationController.SetAnimation(AnimationType.Death);
-
+            _movementController.Stop();
+            _animationController?.SetAnimation(AnimationType.Death);
             StartCoroutine(StartDeathTimer());
         }
 
