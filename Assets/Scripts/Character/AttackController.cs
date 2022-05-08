@@ -74,8 +74,7 @@ namespace Character
                     Ray ray = new Ray(_arrowSpawnPoint.position, direction);
                     RaycastHit hit;
                     Physics.Raycast(ray, out hit, _radius);
-
-                    Debug.Log($"{hit.transform} and {_hitColliders[i].transform}");
+                    
                     if (hit.transform != _hitColliders[i].transform)
                     {
                         continue;

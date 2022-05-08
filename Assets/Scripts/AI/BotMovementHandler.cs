@@ -25,6 +25,11 @@ namespace AI
 
         private void Update()
         {
+            if (!_canMove)
+            {
+                return;
+            }
+            
             if (!_agent.hasPath)
             {
                 if (_isFindingPath)
@@ -47,6 +52,7 @@ namespace AI
 
         public override void Stop()
         {
+            _canMove = false;
             _agent.enabled = false;
             StopAllCoroutines();
         }

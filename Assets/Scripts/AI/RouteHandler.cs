@@ -16,8 +16,7 @@ namespace AI
         private float _t;
         private bool _isReturning;
         private bool _isStarted;
-        private bool _canMove = true;
-        
+
         private void Start()
         {
             StartMove();

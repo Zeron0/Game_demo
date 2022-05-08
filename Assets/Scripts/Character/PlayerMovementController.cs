@@ -13,8 +13,7 @@ namespace Character
         [SerializeField] private float _attackRotationDegree = 75f;
 
         private Transform _target;
-        private bool _canMove = true;
-        
+
         public bool IsMoving { get; private set; }
         
         private void Update()

@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Character
 {
     public class HealthController : MonoBehaviour, IDamageable
     {
+        [SerializeField] private List<SkinnedMeshRenderer> _meshRenderers;
         [SerializeField] private AnimationController _animationController;
         [SerializeField] private MovementController _movementController;
+        [SerializeField] private Shader _shader;
 
         [SerializeField] private int _initialHP = 3;
         [SerializeField] private float _deathDelay = 2;
@@ -40,6 +43,11 @@ namespace Character
             _movementController.Stop();
             _animationController?.SetAnimation(AnimationType.Death);
             StartCoroutine(StartDeathTimer());
+
+            foreach (var mesh in _meshRenderers)
+            {
+                mesh.material.shader = _shader;
+            }
         }
 
         private IEnumerator StartDeathTimer()
