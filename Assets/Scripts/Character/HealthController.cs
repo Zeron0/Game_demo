@@ -43,17 +43,18 @@ namespace Character
             _movementController.Stop();
             _animationController?.SetAnimation(AnimationType.Death);
             StartCoroutine(StartDeathTimer());
-
-            foreach (var mesh in _meshRenderers)
-            {
-                mesh.material.shader = _shader;
-            }
         }
 
         private IEnumerator StartDeathTimer()
         {
             yield return new WaitForSeconds(_deathDelay);
-            Destroy(gameObject);
+            
+            foreach (var mesh in _meshRenderers)
+            {
+                mesh.material.shader = _shader;
+            }
+            
+            Destroy(gameObject, _deathDelay);
         }
     }
 }
