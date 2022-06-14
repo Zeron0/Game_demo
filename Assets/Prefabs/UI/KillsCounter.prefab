@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4884268074969523263}
   - component: {fileID: 4884268074969523257}
   - component: {fileID: 1887113049945956189}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: KillsCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 4884268075320353247}
   - component: {fileID: 4884268075320353241}
   - component: {fileID: 4884268075320353246}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

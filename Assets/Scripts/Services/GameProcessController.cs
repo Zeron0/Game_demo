@@ -12,6 +12,7 @@ namespace Services
     {
         [SerializeField] private TimerHolder _timerHolder;
         [SerializeField] private KillsCounterView _killsCounterView;
+        [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private StartWindow _startWindow;
         [SerializeField] [Min(0)] private int _needKilling = 5;
 
@@ -22,7 +23,7 @@ namespace Services
         private void Awake()
         {
             CalculateBots();
-            _killCounter = new KillCounter(_healthControllers, _killsCounterView);
+            _killCounter = new KillCounter(_healthControllers, _killsCounterView, _progressBar);
             _startWindow.OnGameStart += StartGame;
             _timerHolder.OnTimerOver += Complete;
         }
