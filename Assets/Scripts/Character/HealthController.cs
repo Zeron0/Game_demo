@@ -44,7 +44,7 @@ namespace Character
         {
             _alive = false;
             _movementController.Stop();
-            _animationController.SetAnimation(AnimationType.Death);
+            _animationController?.SetAnimation(AnimationType.Death);
             StartCoroutine(StartDeathTimer());
             OnDeath?.Invoke();
         }

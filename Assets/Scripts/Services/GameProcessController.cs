@@ -5,6 +5,7 @@ using System.Net.NetworkInformation;
 using Character;
 using UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Services
 {
@@ -14,6 +15,7 @@ namespace Services
         [SerializeField] private KillsCounterView _killsCounterView;
         [SerializeField] private ProgressBar _progressBar;
         [SerializeField] private StartWindow _startWindow;
+        [SerializeField] private FinalWindow _finalWindow;
         [SerializeField] [Min(0)] private int _needKilling = 5;
 
         private List<AttackController> _attackControllers = new List<AttackController>();
@@ -23,9 +25,15 @@ namespace Services
         private void Awake()
         {
             CalculateBots();
+            _finalWindow.gameObject.SetActive(false);
             _killCounter = new KillCounter(_healthControllers, _killsCounterView, _progressBar);
             _startWindow.OnGameStart += StartGame;
             _timerHolder.OnTimerOver += Complete;
+        }
+
+        public void Reload()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         private void StartGame()
@@ -50,6 +58,9 @@ namespace Services
             {
                 Won = _killCounter.Kills >= _needKilling
             };
+            
+            _finalWindow.gameObject.SetActive(true);
+            _finalWindow.SetText(gameResult.Won ? "Level completed" : "Level failed");
         }
     }
 

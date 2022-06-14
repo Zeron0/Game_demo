@@ -44,10 +44,10 @@ namespace AI
         private IEnumerator FindTargetPosition()
         {
             _isFindingPath = true;
-            _animationController.SetAnimation(AnimationType.Idle);
+            _animationController?.SetAnimation(AnimationType.Idle);
             yield return _interval;
             _isFindingPath = false;
-            _animationController.SetAnimation(AnimationType.Walk);
+            _animationController?.SetAnimation(AnimationType.Walk);
             _targetPosition = _initialPosition + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f) * _range);
             _agent.SetDestination(_targetPosition);
         }
