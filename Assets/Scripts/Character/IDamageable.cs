@@ -9,6 +9,6 @@ namespace Character
         public bool Alive { get; }
 
         public void TakeDamage(int damage);
-        public void OnDeath();
+        public void Die();
     }
 }

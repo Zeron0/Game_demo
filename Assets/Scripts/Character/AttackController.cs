@@ -27,7 +27,7 @@ namespace Character
 
         public int Damage => _damage;
 
-        private void Awake()
+        public void Init()
         {
             _hitColliders = new Collider[10];
             _finding = new WaitForSeconds(_interval);
@@ -73,8 +73,12 @@ namespace Character
                     Vector3 direction = _hitColliders[i].transform.position - _arrowSpawnPoint.position;
                     Ray ray = new Ray(_arrowSpawnPoint.position, direction);
                     RaycastHit hit;
-                    Physics.Raycast(ray, out hit, _radius);
-                    
+
+                    if (!Physics.Raycast(ray, out hit, _radius))
+                    {
+                        break;
+                    }
+
                     if (hit.transform != _hitColliders[i].transform)
                     {
                         continue;

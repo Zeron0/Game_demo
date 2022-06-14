@@ -25,6 +25,7 @@ namespace Character
 
         public void SetAnimation(AnimationType type)
         {
+            Debug.Log(type);
             if (_animationType == type)
             {
                 return;

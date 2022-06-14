@@ -223,6 +223,7 @@ MonoBehaviour:
   _animationController: {fileID: 1250045034360047587}
   _movementController: {fileID: 1250045034150292590}
   _shader: {fileID: -6465566751694194690, guid: e46c6a8bc6b93d84a906da0ed729f069, type: 3}
+  _dissolve: {fileID: 2100000, guid: bfec5c2e29128d148961ae31a045a71c, type: 2}
   _initialHP: 3
   _deathDelay: 2
 --- !u!136 &1250045034150292589
@@ -273,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef92bca107bc5f409cb24938d375d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animationController: {fileID: 1250045034360047587}
   _agent: {fileID: 1250045034150292588}
   _actionInterval: 1
   _range: 3
@@ -992,7 +994,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: d77e0481f4c667a44a2d1dacf5e81fed, type: 2}
     - target: {fileID: 5866666021909216657, guid: f93e3b9eb13b0324aa72103ee86fe5fd, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f93e3b9eb13b0324aa72103ee86fe5fd, type: 3}

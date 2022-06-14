@@ -29,7 +29,7 @@ namespace AI
                 return;
             }
             
-            _t = Mathf.Clamp01(_t += Time.deltaTime * _speed);
+            _t = Mathf.Clamp01(_t + Time.deltaTime * _speed);
 
             if (_t == 1)
             {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace UI
 {
-    public class Timer : MonoBehaviour
+    public class TimerHolder : MonoBehaviour
     {
         public event Action OnTimerOver;
         
@@ -15,15 +15,17 @@ namespace UI
 
         private float _value;
         private bool _isOver;
+        private bool _isInit;
         
-        private void Awake()
+        public void Init()
         {
+            _isInit = true;
             _value = _startValue;
         }
 
         private void Update()
         {
-            if (_isOver)
+            if (!_isInit || _isOver)
             {
                 return;
             }
@@ -37,7 +39,7 @@ namespace UI
                 OnTimerOver?.Invoke();
             }
 
-            _text.text = ((int) _value).ToString();
+            _text.text = $"Left time: {(int)_value}";
         }
     }
 }

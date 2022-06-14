@@ -7,14 +7,17 @@ namespace Character
 {
     public class HealthController : MonoBehaviour, IDamageable
     {
+        public event Action OnDeath;
+        
         [SerializeField] private List<SkinnedMeshRenderer> _meshRenderers;
         [SerializeField] private AnimationController _animationController;
         [SerializeField] private MovementController _movementController;
         [SerializeField] private Shader _shader;
+        [SerializeField] private Material _dissolve;
 
         [SerializeField] private int _initialHP = 3;
         [SerializeField] private float _deathDelay = 2;
-
+        
         private int _currentHP;
         private bool _alive = true;
 
@@ -33,16 +36,17 @@ namespace Character
 
             if (_alive && _currentHP <= 0)
             {
-                OnDeath();
+                Die();
             }
         }
 
-        public void OnDeath()
+        public void Die()
         {
             _alive = false;
             _movementController.Stop();
-            _animationController?.SetAnimation(AnimationType.Death);
+            _animationController.SetAnimation(AnimationType.Death);
             StartCoroutine(StartDeathTimer());
+            OnDeath?.Invoke();
         }
 
         private IEnumerator StartDeathTimer()
@@ -51,10 +55,24 @@ namespace Character
             
             foreach (var mesh in _meshRenderers)
             {
-                mesh.material.shader = _shader;
+                mesh.material = _dissolve;
+                StartCoroutine(Dissolve(mesh.material));
             }
             
             Destroy(gameObject, _deathDelay);
+        }
+
+        private IEnumerator Dissolve(Material material)
+        {
+            string field = "_TimeValue";
+            float time = 0;
+
+            while (time < 1)
+            {
+                time += Time.deltaTime;
+                material.SetFloat(field, time);
+                yield return new WaitForEndOfFrame();
+            }
         }
     }
 }

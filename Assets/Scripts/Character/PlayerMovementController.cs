@@ -6,7 +6,6 @@ namespace Character
     public class PlayerMovementController : MovementController
     {
         [SerializeField] private Joystick _joystick;
-        [SerializeField] private AnimationController _animationController;
         [SerializeField] private CharacterController _characterController;
 
         [SerializeField] private float _speed = 1;
@@ -26,18 +25,17 @@ namespace Character
             if (_joystick.Direction == Vector2.zero)
             {
                 IsMoving = false;
+                _animationController.SetAnimation(AnimationType.Idle);
 
                 if (_target)
                 {
                     Vector3 targetPosition = new Vector3(_target.position.x, transform.position.y, _target.position.z); 
                     transform.rotation = Quaternion.LookRotation(targetPosition - transform.position) * Quaternion.Euler(0, _attackRotationDegree, 0);
                 }
-                
-                _animationController.SetAnimation(AnimationType.Idle);
-                
+
                 return;
             }
-
+            
             IsMoving = true;
             Vector3 direction = new Vector3(_joystick.Direction.x, 0, _joystick.Direction.y);
             transform.rotation = Quaternion.LookRotation(direction);
